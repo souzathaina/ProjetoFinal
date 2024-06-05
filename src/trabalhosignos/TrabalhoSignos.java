@@ -2,6 +2,7 @@ package trabalhosignos;
 
 import java.time.LocalDate;
 import java.util.Calendar;
+import java.util.Random;
 import java.util.Scanner;
 
 public class TrabalhoSignos {
@@ -17,6 +18,7 @@ public class TrabalhoSignos {
 
         Scanner ler = new Scanner(System.in);
 
+        //perguntas ao usuário
         System.out.println("Qual é o seu nome?");
         nome = ler.nextLine();
 
@@ -32,25 +34,61 @@ public class TrabalhoSignos {
         System.out.println("Qual é o seu sexo 1-Feminino ou 2-Masculino");
         sexo = ler.nextInt();
 
-        //retirar caracteres especiais e quantidade de letras
+        //tratamento ao usuário
         if (sexo == 1) {
-            System.out.println("Srtª. " + nome);
+            System.out.println("Sra. " + nome);
         } else if (sexo == 2) {
-            System.out.println("Srt. " + nome);
+            System.out.println("Sr. " + nome);
         } else {
             System.out.println("Informe um número válido");
         }
 
-        
-
         // RESULTADO
-        idade = ((anoA * 365 + mesA * 12 + diaA) - (ano * 365 + mes * 12 + dia)) / 365;
         System.out.println("Você é do signo " + gerarSigno(dia, mes, ano) + " você tem " + idade + " anos de idade");
-        System.out.println("Seus números da sorte são " + numeroSorte(gerarSigno(dia, mes, ano)));
 
-        //descobrir signo
+        System.out.println("Seus números da sorte são " + declararNumeroSorte(gerarSigno(dia, mes, ano)));
+
+        //calculo idade
+        idade = ((anoA * 365 + mesA * 12 + diaA) - (ano * 365 + mes * 12 + dia)) / 365;
+
+        //idade inválida
+        if (mes >= 1 && mes <= 12 || ano >= 1900 && ano <= anoA) {
+            if (dia > diaA && mes >= mesA && ano >= anoA) {
+                System.out.println("Tu existe? Coloque uma data válida!!");
+            } else {
+
+                if ((mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || mes == 10 || mes == 12) && dia >= 1 && dia <= 31) {
+
+                }
+                if (nome.length() < 8 || nome.equals("Insira seu nome e sobrenome")) {
+                    System.out.println("Coloque seu nome verdadeiro");
+                }
+                
+                //caracteres não permitidos na data de nascimento
+        String caracteres = "QWERTYUIOPASDFGHJKLÇZXCVBNMqwertyuiopasdfghjklçxczvbnm!@#$%¨&*()-_=+§{[ª~^|}]'º:;?/°,.\\\"";
+            }
+            //caracteres não permidos no nome
+            String caracteres = "1234567890!@#$%¨&*()-_=+§{[ª~^|}]'º:;?/°,.\\\"";
+        
+            System.out.println("Escreva seu nome somente com letras");
+           
+                }
+            }
+        
+    
+
+    //cores da sorte aleatória
+    public String declararCor(String cor) {
+        String corAleatoria[] = {"vermelho-intenso", "verde-aconchegante", "amarelo-vivo", "rosa-delicado", "laranja-expressivo ", "branco-pigmentado", "violeta-silencioso", "marrom-avermelhado", "magenta "};
+        Random nCor = new Random();
+        int i = nCor.nextInt(corAleatoria.length);
+        String cores = corAleatoria[i];
+
+        return cores;
+
     }
 
+    //descobrir o signo
     public static String gerarSigno(int dia, int mes,
             int ano) {
         String signo = "";
@@ -79,7 +117,8 @@ public class TrabalhoSignos {
         return signo;
     }
 
-    public static String numeroSorte(String signo) {
+    //número da sorte de acordo com o signo
+    public static String declararNumeroSorte(String signo) {
 
         String result = "";
         if (signo.equals("Aries")) {
@@ -109,25 +148,5 @@ public class TrabalhoSignos {
 
         }
         return result;
-
     }
-public static String definirAnoBissexto (int mes, int dia, int ano){
-          String result = " ";
-        if ((mes==4 || mes==6 || mes==9 || mes==11)&& dia>30){
-            result = "O mês "+mes+" só possue 30 dias";
-
-    } else if (mes ==2 &&(ano%4==0 && ano %100!=0)||(ano%400==0)){
-        if (dia>29){
-            result ="Ano bissexto, Fevereiro só possue 29 dias";
-            return result;
-            
-        }
-        
-        //caracter especial
-        if (nome == "1234567890!@#$%¨&*()-_=+§{[ª~^|}]'º:;?/°,.\\\"") {
-            System.out.println("Informe o seu nome sem caracteres especiais");
-        } else {
-            System.out.println("Legal, se seu nome fosse verdadeiro");
-        }
-    }
-
+}
