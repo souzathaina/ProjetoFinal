@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class TrabalhoSignos {
 
     public static void main(String[] args) {
-        String nome;
+        String nome, caracteres, cor;
         Calendar hoje = Calendar.getInstance();
         int dia, mes, ano, idade = 0, signo, sexo;
         int diaA, mesA, anoA;
@@ -19,20 +19,75 @@ public class TrabalhoSignos {
         Scanner ler = new Scanner(System.in);
 
         //perguntas ao usuário
-        System.out.println("Qual é o seu nome?");
+        System.out.println("Qual seu nome? ");
         nome = ler.nextLine();
+
+        if (nome.length() >= 8) {
+
+        } else {
+            System.out.println("Seu nome deve ter no minimo 8 letras");
+            return;
+        }
+        String carateres = "1234567890!@#$%¨&*()-_=+§{[ª~^|}]'º:;?/°,.\\\"";
+        if (nome.equals(carateres)) {
+
+        } else {
+            System.out.println("Seu nome só deve ter letras");
+            return;
+        }
 
         System.out.println("Qual é dia que você nasceu?");
         dia = ler.nextInt();
 
+        if (dia >= 1 && dia <= 31) {
+
+        } else {
+            System.out.println("Informe um dia entre 1 a 31");
+
+            return;
+        }
+
         System.out.println("Qual o mês que você nasceu?");
         mes = ler.nextInt();
+
+        if (mes >= 1 && mes <= 12) {
+        } else {
+            System.out.println("Informe o mês entre 1 a 12");
+            return;
+        }
 
         System.out.println("Qual o ano que você nasceu?");
         ano = ler.nextInt();
 
+        if (ano >= 1900 && ano <= anoA) {
+        } else {
+            System.out.println("Informe o ano entre 1900 até o ano atual");
+            return;
+        }
+
+        //validade do nascimento, dia, mês e ano
+        if ((mes == 4 || mes = 6 || mes == 9 || mes == 11) && dia > 30) {
+            System.out.println("O mês informado só tem 30 dias");
+            return;
+        } else if ((mes = 2 && (ano % 4 == 0 && ano % 100 != 0) || (ano % 400 == 0))  {
+            if (dia > 29) {
+                System.out.println("Fevereiro em ano Bissexto só tem 29 dias");
+                return;
+            }
+        } else if (mes == 2 && dia > 28) {
+            System.out.println("Fevereiro só tem 28 dias");
+            return;
+        }
+
         System.out.println("Qual é o seu sexo 1-Feminino ou 2-Masculino");
         sexo = ler.nextInt();
+
+        if (sexo == 1 || sexo == 2) {
+
+        } else {
+            System.out.println("Informe o sexo como 1-Feminino e 2-Masculino");
+            return;
+        }
 
         //tratamento ao usuário
         if (sexo == 1) {
@@ -43,46 +98,23 @@ public class TrabalhoSignos {
             System.out.println("Informe um número válido");
         }
 
+        //calculo idade
+        idade = ((anoA * 365 + mesA * 12 + diaA) - (ano * 365 + mes * 12 + dia)) / 365;
+
         // RESULTADO
         System.out.println("Você é do signo " + gerarSigno(dia, mes, ano) + " você tem " + idade + " anos de idade");
 
         System.out.println("Seus números da sorte são " + declararNumeroSorte(gerarSigno(dia, mes, ano)));
 
-        //calculo idade
-        idade = ((anoA * 365 + mesA * 12 + diaA) - (ano * 365 + mes * 12 + dia)) / 365;
+    }
+//cor aleatória
 
-        //idade inválida
-        if (mes >= 1 && mes <= 12 || ano >= 1900 && ano <= anoA) {
-            if (dia > diaA && mes >= mesA && ano >= anoA) {
-                System.out.println("Tu existe? Coloque uma data válida!!");
-            } else {
+    public String declararCor(String cores) {
 
-                if ((mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || mes == 10 || mes == 12) && dia >= 1 && dia <= 31) {
-
-                }
-                if (nome.length() < 8 || nome.equals("Insira seu nome e sobrenome")) {
-                    System.out.println("Coloque seu nome verdadeiro");
-                }
-                
-                //caracteres não permitidos na data de nascimento
-        String caracteres = "QWERTYUIOPASDFGHJKLÇZXCVBNMqwertyuiopasdfghjklçxczvbnm!@#$%¨&*()-_=+§{[ª~^|}]'º:;?/°,.\\\"";
-            }
-            //caracteres não permidos no nome
-            String caracteres = "1234567890!@#$%¨&*()-_=+§{[ª~^|}]'º:;?/°,.\\\"";
-        
-            System.out.println("Escreva seu nome somente com letras");
-           
-                }
-            }
-        
-    
-
-    //cores da sorte aleatória
-    public String declararCor(String cor) {
         String corAleatoria[] = {"vermelho-intenso", "verde-aconchegante", "amarelo-vivo", "rosa-delicado", "laranja-expressivo ", "branco-pigmentado", "violeta-silencioso", "marrom-avermelhado", "magenta "};
         Random nCor = new Random();
         int i = nCor.nextInt(corAleatoria.length);
-        String cores = corAleatoria[i];
+        cores = corAleatoria[i];
 
         return cores;
 
@@ -110,8 +142,6 @@ public class TrabalhoSignos {
             signo = "Aquário";
         } else if (dia >= 20 && dia <= 28 && mes == 2 || dia >= 1 && dia <= 20 && mes == 3) {
             signo = "Peixes";
-        } else {
-            System.out.println("Informe, dados válidos");
         }
 
         return signo;
